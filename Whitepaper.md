@@ -1,12 +1,12 @@
 ## Project Description
-https://thealgofaucet.com has always been a "community first" project. When the old faucet was taken offline in October 2021 by /u/CrabbyLandscape (he's still legendary for running the first faucet and a huge inspiration), I spent a weekend to learn everything I could about Algorand to replace it. I'm hosting an Algorand node and sending all transaction from it.
+https://thealgofaucet.com has always been a "community first" project. When the old faucet was taken offline in October 2021 by /u/CrabbyLandscape (he's still legendary for running the first faucet and a huge inspiration), I spent a weekend to learn everything I could about Algorand to replace it. I'm hosting an Algorand node and sending all transactions from it.
 
-I am offering hosting of the website and my technical knowledge for free, the community is providing the funds to pay for transactions
+I am offering hosting of the website and my technical knowledge for free. The community is providing the funds to pay for transactions
 
 As an incentive, when they donate to the faucet, they will receive the ASA : Algorand Faucet Drops - AFD - 393495312
 
 ## Mission
-The goal is to provide a free service to the Algorand community using Algorand's philosophy of "doing the right thing for the sake of doing the right thing". The same philosophy behind the fact why there are no incentive for running a participation node. By helping the community, I'm helping myself since I'm a part of the Algorand community.
+The goal is to provide a free service to the Algorand community using Algorand's philosophy of "doing the right thing for the sake of doing the right thing". The same philosophy underlying the lack of incentive for running a participation node. By helping the community, I'm helping myself since I'm a part of the Algorand community.
 
 I started by offering the small faucet drops in November 2021 with the goal of automatically and daily compounding accounts for the rewards available on the blockchain. I've sent more than 200 000 drops since then!
 
@@ -14,11 +14,11 @@ Those Algorand Rewards are now phasing out by May 2022, although they'll be extr
 
 ## New Mission / February 2022
 
-There is now a new mission, provide a free staking service unlike any other. By using TheAlgoFaucet's service, you can provide holders of your ASA or Liquidity Pool Providers rewards based on how much they own. A very fair way to distribute rewards, very similar to the way the Algorand Blockchain did it.
+There is now a new mission : provide a free staking service unlike any other. By using TheAlgoFaucet's service, you can provide holders of your ASA or Liquidity Pool Providers rewards based on how much they own. A very fair way to distribute rewards, very similar to the way the Algorand Blockchain did it.
 
 My script can also be easily adjusted to reward NFT holders with another ASA.
 
-The generic idea is "I check the blockchain for a value (all holders with a specific amount of an ASA), I then build transactions to send to those holders with specific parameters. Those adjustable parameters are at the end of this White Paper.
+The generic idea is to check the blockchain for a value (all holders with a specific amount of an ASA) and then build transactions to send to those holders with specific parameters. Those adjustable parameters are at the end of this White Paper.
 
 All transaction costs are paid for by donations to the Faucet.
 
@@ -26,7 +26,7 @@ I use a variation of the script I perfected by running the faucet for all those 
 
 ### The basic gist of the license is this : 
 
-Weither you're using this personally or commercially, you have to use the same GPL v3.0 license and provide the source code of your scripts.
+Whether you're using this personally or commercially, you have to use the same GPL v3.0 license and provide the source code of your scripts.
 
 I provide no warranty on this script and am not liable if anything breaks or goes awry if you use it.
 
