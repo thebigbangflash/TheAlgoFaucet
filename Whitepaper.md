@@ -60,6 +60,12 @@ Using what I learned by running the Faucet, I like to stress test the testnet ne
 
 One of my tests and a description here : https://www.reddit.com/r/algorand/comments/s5q7ne/i_attacked_algorands_network_testnet/
 
+## About Doxxing
+
+I know doxxing myself would help bring more trust to the project but I'm not super happy at this idea.
+
+That being said, if there ever comes a day where I can call it quits at my current day job and start managing the faucet full time, I'll gladly doxx myself.
+
 ## List of Parameters which can be adjusted in the script.
 
 ASA-Number to lookup : *Ex : 393495312*
