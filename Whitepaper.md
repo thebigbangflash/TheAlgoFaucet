@@ -62,7 +62,7 @@ One of my tests and a description here : https://www.reddit.com/r/algorand/comme
 
 ## About Doxxing
 
-I know doxxing myself would help bring more trust to the project but I'm not super happy at this idea.
+I know doxxing myself would help bring more trust to the project but I'm not super happy at this idea. I know how doxxing myself can have very negative repercussions on my life.
 
 That being said, if there ever comes a day where I can call it quits at my current day job and start managing the faucet full time, I'll gladly doxx myself.
 
