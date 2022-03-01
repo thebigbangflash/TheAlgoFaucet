@@ -142,7 +142,7 @@ reward=$(echo $stake*$STAKEDAILY/1|bc)
 echo STAKE $i $account $reward  >> ${TMPPATH}/dryrun.txt
 
 #BUILD STAKE TRANSACTION. UNCOMMENT BELOW WHEN YOURE READY FOR LIVE
-#goal asset send --from=$DISTRIBUTER --assetid=$ASA --to=$account --fee=1000 --amount=$reward --note="${STAKENOTE} ${i}" --out="${TMPPATH}/staketmp${i}"
+#goal asset send --from=$DISTRIBUTER --assetid=$ASA --to=$account --fee=1000 --amount=$reward --note=" ${STAKENOTE} ${i}" --out="${TMPPATH}/staketmp${i}"
 
 #Delete the current line in the file it's looping
 sed -i '1d' "${TMPPATH}/stake.txt"
