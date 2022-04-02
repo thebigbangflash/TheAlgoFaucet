@@ -198,12 +198,10 @@ rm "${TMPPATH}/2stake.txt"
 
 #cat ${TMPPATH}/staketmp* > ${TMPPATH}/unsigned.txn
 #goal clerk sign --infile=${TMPPATH}/unsigned.txn --outfile=${TMPPATH}/signed.stxn
-#goal clerk rawsend --filename=${TMPPATH}/signed.stxn
+#goal clerk rawsend -N --filename=${TMPPATH}/signed.stxn
 #sleep 15
-#goal clerk rawsend --filename=${TMPPATH}/signed.stxn
+#goal clerk rawsend -N --filename=${TMPPATH}/signed.stxn
 #sleep 15
-#goal clerk rawsend --filename=${TMPPATH}/signed.stxn
-#rm ${TMPPATH}/staketmp*
-#rm ${TMPPATH}/unsigned.txn
-#rm ${TMPPATH}/signed.stxn
+#goal clerk rawsend -N --filename=${TMPPATH}/signed.stxn
+#rm ${TMPPATH}/*
 
