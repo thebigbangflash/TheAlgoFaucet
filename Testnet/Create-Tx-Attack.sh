@@ -1,10 +1,10 @@
-    ####bash
-    #setup o for outer loop and i for inner loop.
-    o=0
-    i=0
-    #start outer loop
-    while [ $o -le 359 ]
-    do
+#!/bin/bash
+#setup o for outer loop and i for inner loop.
+o=0
+i=0
+#start outer loop
+  while [ $o -le 359 ]
+  do
     #start inner loop
     while [ $i -le 9999 ]
     do
@@ -24,15 +24,15 @@
     i=$(($i+1))
     #close inner loop
     done
-    
-    #concatenate 10 000 transactions in a single file
-    cat /home/algotest/tmp/attack* > /home/algotest/tmp/unsigned.txn
-    
-    #sign this transaction and clean up. Cleanup isn't really necessary since it should overwrite the old transactions, but I feel better cleaning up after myself. It's also easier to check where I'm at if I want to stop the script in the middle.
-    goal clerk sign --infile=/home/algotest/tmp/unsigned.txn --outfile=/home/algotest/signed/signed${o}.stxn
-    rm /home/algotest/tmp/attack*
-    rm /home/algotest/tmp/unsigned.txn
-    #put $i back at 0 to start the inner loop again. Increment outer loop.
-    i=0
-    o=$(($o+1))
-    done
+
+  #concatenate 10 000 transactions in a single file
+  cat /home/algotest/tmp/attack* > /home/algotest/tmp/unsigned.txn
+
+  #sign this transaction and clean up. Cleanup isn't really necessary since it should overwrite the old transactions, but I feel better cleaning up after myself. It's also easier to check where I'm at if I want to stop the script in the middle.
+  goal clerk sign --infile=/home/algotest/tmp/unsigned.txn --outfile=/home/algotest/signed/signed${o}.stxn
+  rm /home/algotest/tmp/attack*
+  rm /home/algotest/tmp/unsigned.txn
+  #put $i back at 0 to start the inner loop again. Increment outer loop.
+  i=0
+  o=$(($o+1))
+  done
