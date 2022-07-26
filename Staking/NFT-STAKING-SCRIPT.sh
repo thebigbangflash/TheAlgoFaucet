@@ -94,6 +94,9 @@ mkdir -p $LOGPATH
 sed -i '/^[^#]/ s/\(^.*mkdir.*$\)/#\ \1/' $0
 #Okay I m done
 
+#Clean up just in case some garbage is still left
+rm ${TMPPATH}/*
+
 #Get values to calculate USD and Swap Ratio
 ASAINPOOL=$(curl -X GET "https://mainnet-algorand.api.purestake.io/idx2/v2/accounts/${TINYMANPOOL}/" -H "x-api-key:${purestakeapi}" -H 'accept: application/json' | jq -r '.account.assets[] | select (."asset-id"=='"$ASA"') | .amount')
 # curl Algo price from CMC
@@ -153,7 +156,7 @@ done
 # Create increment variable, start loops!
 i=0
 
-################### START LOOP ###########################
+################### START CONSOLIDATION LOOP ###########################
 t=0
 
 while [ $t -lt $a ]
@@ -166,10 +169,7 @@ do
   REWARDPRICE=$(echo "scale=6; $reward*$SWAPRATIO*$ALGOPRICE/$ASAUNIT" | bc)
 
   #DryRun
-  echo tier$t $account $reward $i $REWARDPRICE USD >> ${TMPPATH}/dryrun.txt
-
-  #BUILD TX. Uncomment when ready for prod.
-  #goal asset send --from=$DISTRIBUTER --assetid=$ASA --to=$account --fee=1000 --amount=$reward --note="${NFTNOTE} tier=${t} id=${i} currentvalue=${REWARDPRICE} USD" --out="${TMPPATH}/staketmp${i}"
+  echo tier$t $account $reward $i >> ${TMPPATH}/dryrun.txt
 
   #Delete the current line in the file it's looping
   sed -i '1d' "${TMPPATH}/tier${t}.txt"
@@ -182,16 +182,35 @@ do
 t=$(($t+1))
 done
 
-################### END LOOP ##############################
-
-# Gather some stats, for people who like that kind of stuff.#############
-
-total=$(awk '{print$3}' "${TMPPATH}/dryrun.txt" | paste -sd+ | bc)
-printf "\nstats:\n$i addresses\n$total $NAME-$ASA\n" >> "${TMPPATH}/dryrun.txt"
-cp "${TMPPATH}/dryrun.txt" "${LOGPATH}/send`date +"%Y%m%d_%H%M"`.txt"
+################### END CONSOLIDATION LOOP ##############################
 
 
+################### START TRANSACTION LOOP ###########################
+i=0
+awk '{OFMT="%.0f";a[$2]+=$3}END{for(i in a) print i,a[i]}' "${TMPPATH}/dryrun.txt" > "${TMPPATH}/consolidated.txt"
+cp "${TMPPATH}/consolidated.txt" "${LOGPATH}/consolidated`date +"%Y%m%d_%H%M"`.txt"
+cp "${TMPPATH}/dryrun.txt" "${LOGPATH}/dryrun`date +"%Y%m%d_%H%M"`.txt"
 
+while IFS= read -r line; do
+  account=$(awk 'NR==1{print$1}' "${TMPPATH}/consolidated.txt")
+  reward=$(awk 'NR==1{print$2}' "${TMPPATH}/consolidated.txt")
+  REWARDPRICE=$(echo "scale=6; $reward*$SWAPRATIO*$ALGOPRICE/$ASAUNIT" | bc)
+
+  echo $account $reward $REWARDPRICE USD >> "${TMPPATH}/send.txt"
+  
+  #BUILD TX. Uncomment when ready for prod.
+  #goal asset send --from=$DISTRIBUTER --assetid=$ASA --to=$account --fee=1000 --amount=$reward --note="${NFTNOTE} id=${i} currentvalue=${REWARDPRICE} USD" --out="${TMPPATH}/staketmp${i}"
+  
+  i=$(($i+1))
+  sed -i '1d' "${TMPPATH}/consolidated.txt"
+done < "${TMPPATH}/consolidated.txt"
+rm "${TMPPATH}/consolidated.txt"
+cp "${TMPPATH}/send.txt" "${LOGPATH}/send`date +"%Y%m%d_%H%M"`.txt"
+
+total=$(awk '{print$2}' "${TMPPATH}/send.txt" | paste -sd+ | bc)
+printf "\nstats:\n$i addresses\n$total $NAME-$ASA\n" >> "${TMPPATH}/send.txt"
+cp "${TMPPATH}/send.txt" "${LOGPATH}/send`date +"%Y%m%d_%H%M"`.txt"
+################### END TRANSACTION LOOP ###########################
 
 #############################################################################################
 # I suggest adding this script to a cron job
